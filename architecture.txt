@@ -1,0 +1,14 @@
+backend/
+├── controllers/     # C = logique de contrôle (appelée par les routes)
+│   └── besoin.controller.js
+├── models/          # M = modèles de données (définition ORM ou manuelle)
+│   └── besoin.model.js
+├── routes/          # R = API REST (connecte les requêtes aux contrôleurs)
+│   └── besoin.routes.js
+├── services/        # Logique métier réutilisable 
+│   └── besoin.service.js
+├── middlewares/     # Auth, validation, gestion des erreurs
+├── utils/           # Fonctions d’aide, constantes, etc.
+├── config/          # Connexion BDD, config globale
+├── app.js           # Instanciation de l'app Express
+└── server.js        # Lancement du serveur
