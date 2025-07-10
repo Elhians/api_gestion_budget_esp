@@ -13,20 +13,27 @@ const settingsRoutes = require('./routes/settings.routes');
 const {authenticate} = require('./middlewares/auth.middleware');
 
 const cors = require('cors');
-const corsOptions1 = {
-  origin: process.env.FRONTEND_URL1 || 'https://frontend-gestion-budget-esp.onrender.com',
+
+const allowedOrigins = [
+  process.env.FRONTEND_URL1 || 'https://frontend-gestion-budget-esp.onrender.com',
+  process.env.FRONTEND_URL2 || 'https://set-password-for-budget-esp.onrender.com',
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true); // ✅ Autorisé
+    } else {
+      callback(new Error('❌ Not allowed by CORS'));
+    }
+  },
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, 
+  credentials: true,
   optionsSuccessStatus: 204
 };
-const corsOptions2 = {
-  origin: process.env.FRONTEND_URL2 || 'https://set-password-for-budget-esp.onrender.com',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, 
-  optionsSuccessStatus: 204
-};
-app.use(cors(corsOptions2));
-app.use(cors(corsOptions1));
+
+app.use(cors(corsOptions));
+
 
 app.use(express.json());
 app.use('/api/auth', authRoutes);
