@@ -14,13 +14,13 @@ const {authenticate} = require('./middlewares/auth.middleware');
 
 const cors = require('cors');
 const corsOptions1 = {
-  origin: process.env.FRONTEND_URL1 || 'http://localhost:5173',
+  origin: process.env.FRONTEND_URL1 || 'https://frontend-gestion-budget-esp.onrender.com',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, 
   optionsSuccessStatus: 204
 };
 const corsOptions2 = {
-  origin: process.env.FRONTEND_URL2 || 'http://localhost:5174',
+  origin: process.env.FRONTEND_URL2 || 'https://set-password-for-budget-esp.onrender.com',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, 
   optionsSuccessStatus: 204
