@@ -28,7 +28,7 @@ services:
       JWT_SECRET: supersecret
     volumes:
       - ./backend:/app
-    command: npm run dev
+    command: sh -c "sleep 15 && npm run dev"
 
 volumes:
   mysql_data:
