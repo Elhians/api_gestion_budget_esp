@@ -28,7 +28,7 @@ services:
       JWT_SECRET: supersecret
     volumes:
       - ./backend:/app
-    command: sh -c "until nc -z mysql 3306; do sleep 1; done; npm run dev"
+    command: npm run dev
 
 volumes:
   mysql_data:
