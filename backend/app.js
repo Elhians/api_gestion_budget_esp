@@ -21,6 +21,7 @@ const allowedOrigins = [
 
 const corsOptions = {
   origin: function (origin, callback) {
+    console.log('🛰️ Requête CORS venant de :', origin);
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true); // ✅ Autorisé
     } else {
@@ -46,5 +47,10 @@ app.use('/api/departements', departementRoutes);
 app.use('/api/activitylogs', activityLogRoutes);
 app.use('/api/revenus', revenuRoutes);
 app.use('/api/settings', settingsRoutes);
+
+app.use((err, req, res, next) => {
+  console.error('💥 Erreur attrapée globalement :', err.stack || err);
+  res.status(500).json({ message: 'Erreur interne du serveur' });
+});
 
 module.exports = app;
