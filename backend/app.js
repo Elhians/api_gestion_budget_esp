@@ -13,13 +13,20 @@ const settingsRoutes = require('./routes/settings.routes');
 const {authenticate} = require('./middlewares/auth.middleware');
 
 const cors = require('cors');
-const corsOptions = {
-  origin: 'http://localhost:5173',
+const corsOptions1 = {
+  origin: process.env.FRONTEND_URL1 || 'http://localhost:5173',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, 
   optionsSuccessStatus: 204
 };
-app.use(cors(corsOptions));
+const corsOptions2 = {
+  origin: process.env.FRONTEND_URL2 || 'http://localhost:5174',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, 
+  optionsSuccessStatus: 204
+};
+app.use(cors(corsOptions2));
+app.use(cors(corsOptions1));
 
 app.use(express.json());
 app.use('/api/auth', authRoutes);

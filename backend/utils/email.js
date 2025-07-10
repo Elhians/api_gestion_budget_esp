@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
  * @param {string} token - Jeton de création de mot de passe
  */
 exports.sendResetPasswordEmail = async (to, token) => {
-    const url = `${process.env.FRONTEND_URL}/definir-mot-de-passe?token=${token}`;
+    const url = `${process.env.FRONTEND_URL2}/definir-mot-de-passe?token=${token}`;
 
     const mailOptions = {
         from: `"ESP Budget" <${process.env.MAIL_USER}>`,

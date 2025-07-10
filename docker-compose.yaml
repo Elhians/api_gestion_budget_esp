@@ -27,6 +27,12 @@ services:
       DB_PASSWORD: 3llUKuFKGlVSdy1gzs5q5BfptCbWPXAC
       DB_NAME: gestion_budget_esp
       JWT_SECRET: supersecret
+      JWT_EXPIRATION: 2h
+      MAIL_USER: espbudget@gmail.com
+      MAIL_PASS: jktacretwqiiazmx
+      MAIL_SERVICE: gmail
+      FRONTEND_URL1: https://frontend-gestion-budget-esp.onrender.com
+      FRONTEND_URL2: https://set-password-for-budget-esp.onrender.com
     volumes:
       - ./backend:/app
     command: sh -c "sleep 15 && npm run dev"
