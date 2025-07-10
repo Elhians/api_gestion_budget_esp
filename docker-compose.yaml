@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql_gestion_budget
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: gestion_budget_esp
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  backend:
+    build: ./backend
+    container_name: api_gestion_budget
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: gestion_budget_esp
+      JWT_SECRET: supersecret
+    volumes:
+      - ./backend:/app
+    command: sh -c "until nc -z mysql 3306; do sleep 1; done; npm run dev"
+
+volumes:
+  mysql_data:
