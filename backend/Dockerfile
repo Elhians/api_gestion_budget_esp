@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copie les fichiers
 COPY package*.json ./
-RUN apt-get update && apt-get install -y netcat-openbsd && npm install
+RUN apt-get update && apt-get install -y netcat && npm install
 
 COPY . .
 
