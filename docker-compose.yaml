@@ -1,29 +1,30 @@
 version: '3.8'
 
 services:
-  mysql:
-    image: mysql:8
-    container_name: mysql_gestion_budget
+  postgres:
+    image: postgres:16
+    container_name: postgres_gestion_budget
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: gestion_budget_esp
+      POSTGRES_DB: gestion_budget_esp
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgresql/data
     ports:
-      - "3306:3306"
+      - "5432:5432"
 
   backend:
     build: ./backend
     container_name: api_gestion_budget
     ports:
       - "5000:5000"
-    depends_on:
-      - mysql
+    # depends_on:
+    #   - postgres
     environment:
-      DB_HOST: mysql
-      DB_PORT: 3306
-      DB_USER: root
-      DB_PASSWORD: root
+      DB_HOST: dpg-d1njb4bipnbc73anmn90-a.oregon-postgres.render.com
+      DB_PORT: 5432
+      DB_USER: gestion_budget_esp_user
+      DB_PASSWORD: 3llUKuFKGlVSdy1gzs5q5BfptCbWPXAC
       DB_NAME: gestion_budget_esp
       JWT_SECRET: supersecret
     volumes:
@@ -31,4 +32,4 @@ services:
     command: sh -c "sleep 15 && npm run dev"
 
 volumes:
-  mysql_data:
+  postgres_data:
